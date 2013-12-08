@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-lazy-init="true">
+
+	<description>Shiro安全配置</description>
+
+    <!-- Shiro's main business-tier object for web-enabled applications -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="jdbcAuthenticationRealm"/>
+        <property name="cacheManager" ref="shiroEhcacheManager"/>
+    </bean>
+
+    <!--自定义shiro的realm数据库身份验证 -->
+    <bean id="jdbcAuthenticationRealm" class="org.lework.core.service.account.JdbcAuthenticationRealm">
+        <property name="accountService" ref="accountServiceImpl"/>
+        <property name="roleService" ref="roleServiceImpl"/>
+        <property name="menuService" ref="menuServiceImpl"/>
+        <property name="permissionService" ref="permissionServiceImpl"/>
+
+        <property name="name" value="jdbcAuthentication"/>
+        <property name="defaultPermissions">
+            <list>
+                <value>security:change_password</value>
+                <value>security:index</value>
+            </list>
+        </property>
+        <property name="defaultRoles">
+            <list>
+                <value>guest</value>
+            </list>
+        </property>
+    </bean>
+
+	<!-- 用户授权信息Cache, 采用EhCache -->
+	<bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<property name="cacheManagerConfigFile" value="classpath:cache/ehcache-shiro.xml"/>
+	</bean>
+	
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="filters">
+            <map>
+                <entry key="captchaAuthc" value-ref="captchaAuthenticationFilter" />
+                <entry key="logout" value-ref="logoutFilter" />
+            </map>
+        </property>
+        <!-- shiro的核心安全接口 -->
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/login" />
+        <property name="successUrl" value="/dashboard" />
+        <property name="unauthorizedUrl" value="/error/401" />
+        <property name="filterChainDefinitions">
+            <!--      /login = authc-->
+            <value>
+                /login = captchaAuthc
+                /logout = logout
+                /static/** = anon
+                /register/** = anon
+                /error/** = anon
+                /admin/** = roles[admin]
+                /dashboard/**=roles[guest]
+                /user/**=roles[guest]
+                /role/**=roles[guest]
+                /roleControl/**=roles[guest]
+                /menu/**=roles[guest]
+                /permission/**=roles[guest]
+            </value>
+        </property>
+    </bean>
+
+    <!--shiro 验证码filter-->
+    <bean id="captchaAuthenticationFilter" class="org.lework.core.service.account.CaptchaAuthenticationFilter" lazy-init="false" >
+        <property name="allowLoginNum" value="1" />
+    </bean>
+    <!--shiro 登出操作filter-->
+    <bean id="logoutFilter" class="org.apache.shiro.web.filter.authc.LogoutFilter" lazy-init="false" >
+        <property name="redirectUrl"  value="/login" />
+    </bean>
+
+
+	<!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+	
+	<!-- 启用shiro为spring配置的bean注释，只运行在lifecycleBeanProcessor之后  -->
+    <bean id="annotationProxy" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor">
+		<property name="proxyTargetClass" value="true" />
+    </bean>
+    
+    <!-- 启用shrio授权注解拦截方式 -->
+	<bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+	    <property name="securityManager" ref="securityManager" />
+	</bean>
+</beans>
