@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+
+    <script src="../../assets/js/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="lework.jquery.alert.css">
+    <script src="lework.jquery.alert.js"></script>
+
+</head>
+<body>
+
+<p style="margin:0px auto;"></p>
+ <button onclick="lework.alert({content:'default theme '})" >default </button>
+ <button onclick="lework.alert({content:'default theme ',type:'info'})" >info </button>
+ <button onclick="lework.alert({content:'default theme ',type:'success'})" >success </button>
+ <button onclick="lework.alert({content:'default theme ',type:'danger'})" >danger </button>
+ <button onclick="lework.alert({content:'default theme',type:'error'})"  >error </button>
+<script type="text/javascript">
+    var alert =   lework.alert({content: 'test event',
+        //type:'info' ,
+        onHide: function () {
+            console.log('onHide')
+        }
+    })
+
+</script>
+</body>
+
+</html>

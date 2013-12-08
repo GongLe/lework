@@ -1,0 +1,86 @@
+/**item 选中效果**/
+.checkbuttonNo {
+    margin: 5px;
+    width: auto;
+    border: solid 1px #ccc;
+    height: 40px;
+    background: #F7F7F7;
+    float: left;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.checkbuttonOk {
+    margin: 5px;
+    width: auto;
+    border: solid 1px #6699cc;
+    height: 40px;
+    background: #F7F7F7;
+    float: left;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.checkbuttonNo .triangleNo {
+    display: block;
+    height: 0px;
+    width: 0px;
+    border: 20px solid #ccc;
+    border-color: #ccc #ccc transparent transparent;
+    border-style: solid solid dashed dashed;
+    line-height: 0px;
+    float: right;
+}
+.checkbuttonOk .triangleOk {
+    display: block;
+    height: 40px;
+    width: 40px;
+    float: right;
+    background: url('../images/checkicon.png');
+}
+.checktext {
+    float: left;
+    width: 65px;
+    padding-left: 5px;
+    line-height: 40px;
+    text-align: center;
+    overflow: hidden;
+    word-break: keep-all;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+}
+
+.loading-bar-150_14 {
+    min-width: 150px;
+    background: url('../images/loading-bar-150x14.gif') no-repeat center 0;
+}
+
+.loading-bar-220x20 {
+    min-width: 220px;
+    background: url('../images/loadding-bar-220x20.gif') no-repeat center 0;
+}
+/**重写checkbox样式
+input[type="checkbox"] {
+    height: 18px;
+    width: 18px;
+    overflow: hidden;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAKElEQVR42mNgGMyAH4jlScT82AySJ8Ny+VGDRg0aNYhkg6iWaQcHAACBvQYNy6wzogAAAABJRU5ErkJggg==") -0px -0px no-repeat;
+    -webkit-appearance: none;
+    border: 0;
+    margin: 0 5px -3px;
+
+}
+
+input[type="checkbox"]:hover {
+    -webkit-background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAKUlEQVR42mNgGMyACYg1ScRM2AwCSYiQiDVHDRo1aNQgkg2iWqYdHAAAmfYS+e7yE1oAAAAASUVORK5CYII=") -0px -0px no-repeat;
+}
+
+input[type="checkbox"]:checked, input[type="checkbox"]:checked:hover {
+    height: 18px;
+    width: 18px;
+    overflow: hidden;
+    background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAsElEQVR42mNgGERAEojZkQX4gVieRGwOxJOA2BnZIHkSXWIPxEuAOApdghSDAoF4JhCXATETOQaxAnE61JAcIFbGpoiQQdxAXAk1pBRqqDwhg6YAsT8Qs0D5YkDcDDWkDog58VmOLOgI1VQFxBZA3AflgwzjJeQLdMFUqGYY7gRiIWKCA10Q5PwmqCE9QCxNbLhiE5SFGqKAIwLkSYk1TjwxKU9O9NPfIHIyLT/DoAUAidMX4p1bxFgAAAAASUVORK5CYII=") -0px -0px no-repeat;
+}**/

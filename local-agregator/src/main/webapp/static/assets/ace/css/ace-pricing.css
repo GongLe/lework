@@ -1,0 +1,94 @@
+.pricing-box .price {
+    font-size:22px;
+    line-height:20px;
+    height:28px;
+    text-align:center;
+    color:#555
+}
+.pricing-box .price small {
+    font-size:14px
+}
+.pricing-box .btn {
+    font-size:16px
+}
+.pricing-box .widget-header>.widget-caption,
+.pricing-box .widget-header>:first-child {
+    float:none;
+    margin-left:-9px;
+    text-align:center
+}
+.pricing-table-header {
+    padding-top:0;
+    margin-top:0;
+    text-align:left
+}
+.pricing-table-header>li {
+    padding:7px 0 7px 11px;
+    font-size:13px
+}
+.pricing-table {
+    margin-top:0
+}
+.pricing-table>li {
+    text-align:center;
+    padding:7px 0;
+    font-size:13px
+}
+.list-striped>li:nth-child(odd) {
+    background-color:#FFF
+}
+.list-striped>li:nth-child(even) {
+    background-color:#f2f3eb
+}
+.list-striped.pricing-table-header>li:nth-child(even) {
+    background-color:#EEE
+}
+.pricing-box-small {
+    box-shadow:none;
+    margin-left:-2px;
+    background-color:#FFF;
+    position:relative;
+    z-index:100
+}
+.pricing-box-small .price {
+    line-height:20px;
+    height:28px;
+    text-align:center
+}
+.pricing-box-small .price .label:before,
+.pricing-box-small .price .label:after {
+    margin-top:-2px;
+    opacity:.9;
+    filter:alpha(opacity=90)
+}
+.pricing-box-small:hover {
+    box-shadow:0 0 4px 2px rgba(0,0,0,0.15);
+    z-index:101;
+    -webkit-transform:scale(1.04);
+    -moz-transform:scale(1.04);
+    -ms-transform:scale(1.04);
+    -o-transform:scale(1.04);
+    transform:scale(1.04);
+    -webkit-transform:none
+}
+.pricing-box-small:hover .price>.label {
+    -webkit-transform:scale(0.96);
+    -moz-transform:scale(0.96);
+    -ms-transform:scale(0.96);
+    -o-transform:scale(0.96);
+    transform:scale(0.96);
+    -webkit-transform:none
+}
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .pricing-box-small:hover {
+        -webkit-transform:none;
+        zoom:1.04;
+        left:-1px;
+        top:-3px
+    }
+}
+.pricing-span[class*="span"] {
+     margin:0;
+     max-width:150px!important;
+     float:left!important
+ }

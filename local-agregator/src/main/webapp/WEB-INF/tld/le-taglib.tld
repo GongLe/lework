@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd"
+        version="2.0">
+
+    <description>Custome jsp2.0 taglib</description>
+    <tlib-version>1.0</tlib-version>
+    <short-name>le</short-name>
+    <tag>
+        <name>bundleCss</name>
+        <tag-class>org.lework.core.common.taglib.BundleStylesheet</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>name</description>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue> <!--rtexprvalue的全称是 Run-time Expression Value， 它用于表示是否可以使用JSP表达式. -->
+        </attribute>
+        <attribute>
+            <description>html link#media,default value "all"</description>
+            <name>media</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+    <tag>
+        <name>bundleJs</name>
+        <tag-class>org.lework.core.common.taglib.BundleScript</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <description>name</description>
+            <name>name</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>html script#charset,default value "utf-8"</description>
+            <name>charset</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+
+    <tag>
+        <name>javascript</name>
+        <!-- 定义标签处理类 -->
+        <tag-class>org.lework.core.common.taglib.AssetJavascript</tag-class>
+        <!-- 定义标签体支持JSP脚本 -->
+        <body-content>scriptless</body-content>
+        <!-- 配置标签属性 -->
+        <attribute>
+            <description>equals html script#src ! notice : src relative appConfig.properties#src</description>
+            <name>src</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>equals html script#type</description>
+            <name>type</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>stylesheet</name>
+        <!-- 定义标签处理类 -->
+        <tag-class>org.lework.core.common.taglib.AssetStylesheet</tag-class>
+        <body-content>empty</body-content>
+        <!-- 配置标签属性 -->
+        <attribute>
+            <description>equals html link#href</description>
+            <name>src</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <description>equals html link#type</description>
+            <name>type</name>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <description>equals html link#media</description>
+            <name>media</name>
+            <required>false</required>
+        </attribute>
+        <attribute>
+            <description>equals html link#rel</description>
+            <name>rel</name>
+            <required>false</required>
+        </attribute>
+    </tag>
+</taglib>
