@@ -45,8 +45,9 @@ public class RoleServiceImpl implements RoleService {
 
     private RoleDao roleDao;
     private RoleNativeDao roleNativeDao;
-    private UserDao userDao ;
+    private UserDao userDao;
     private OrganizationDao organizationDao;
+
     @Autowired
     public void setRoleNativeDao(RoleNativeDao roleNativeDao) {
         this.roleNativeDao = roleNativeDao;
@@ -56,6 +57,7 @@ public class RoleServiceImpl implements RoleService {
     public void setOrganizationDao(OrganizationDao organizationDao) {
         this.organizationDao = organizationDao;
     }
+
     @Autowired
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -76,7 +78,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> getUserRolesByStatus(String userId, Status status) {
-        return roleDao.findUserRolesByStatus(userId,status.getCode()) ;
+        return roleDao.findUserRolesByStatus(userId, status.getCode());
     }
 
     @Override
@@ -124,7 +126,7 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Page<Role> searchRolePageByMenu(Pageable pageable, String menuId, String search) {
-         return  roleNativeDao.findRolePageByMenuId(pageable, menuId, search) ;
+        return roleNativeDao.findRolePageByMenuId(pageable, menuId, search);
     }
 
     @Override
@@ -143,8 +145,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void deleteRoles(  List<Role> entities) {
-        if(Collections3.isEmpty(entities))
+    public void deleteRoles(List<Role> entities) {
+        if (Collections3.isEmpty(entities))
             return;
         roleDao.delete(entities);
     }
@@ -180,6 +182,7 @@ public class RoleServiceImpl implements RoleService {
 
     /**
      * query chosen group option DTO
+     *
      * @param selectedList 已选择的节点集合
      * @param ignoreEmpty  是否隐藏空角色组
      * @return
@@ -196,7 +199,7 @@ public class RoleServiceImpl implements RoleService {
                 List<Role> member = roleDao.findRolesByGroupId(group.getId());
                 if (Collections3.isNotEmpty(member)) {
                     for (Role m : member) {
-                        options.add(new ChosenDTO(m.getName(), m.getId(),Collections3.contain(selectedList, m)));
+                        options.add(new ChosenDTO(m.getName(), m.getId(), Collections3.contain(selectedList, m)));
                     }
                 } else if (ignoreEmpty) {
                     continue;
@@ -208,10 +211,12 @@ public class RoleServiceImpl implements RoleService {
         }
         return ret;
     }
+
     @Override
     public Map<String, List<ChosenDTO>> getRoleGroupOptions() {
         return getRoleGroupOptions(null, false);
     }
+
     @Override
     public void createRelateUser(Role role, String userId) {
         User user = userDao.findOne(userId);

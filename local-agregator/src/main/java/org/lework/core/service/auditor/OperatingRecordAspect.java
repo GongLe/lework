@@ -4,6 +4,7 @@ import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.lework.core.common.domain.ShiroUser;
 import org.lework.core.common.utils.SubjectUtils;
@@ -13,6 +14,7 @@ import org.lework.runner.utils.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -31,8 +33,9 @@ import java.util.Map.Entry;
  *
  * @author Gongle
  */
-/*@Aspect
-@Component*/
+
+@Component
+@Aspect
 public class OperatingRecordAspect {
 
     private static Logger logger = LoggerFactory.getLogger(OperatingRecordAspect.class);
@@ -47,7 +50,7 @@ public class OperatingRecordAspect {
     /**
      * 在带有OperatingAudit注解的方法中监控执行过程
      */
-    @SuppressWarnings("unchecked")
+  /*  @SuppressWarnings("unchecked")*/
     @Around("@annotation(org.lework.core.service.auditor.OperatingAudit)")
     public Object doAround(ProceedingJoinPoint point) throws Throwable {
         logger.debug("OperatingAudit注解的方法中监控执行过程");

@@ -1,6 +1,5 @@
-<%@ page import="org.lework.core.utils.SubjectUtils" %>
-<%@ page import="org.lework.core.entity.ShiroUser" %>
-<%@ page import="org.lework.core.entity.menu.Menu" %>
+<%@ page import="org.lework.core.common.domain.ShiroUser" %>
+<%@ page import="org.lework.core.common.utils.SubjectUtils" %>
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/included/taglibs.jsp"%>
 <%

@@ -107,8 +107,12 @@
       });
         oTable.dataTable({
             'aoColumns': [
+                { 'mData': 'module', 'sTitle': '模块' },
                 { 'mData': 'startDate', 'sTitle': '操作开始时间' },
                 { 'mData': 'endDate', 'sTitle': '操作结束时间'}  ,
+                { 'mData': 'function', 'sTitle': '动作'}  ,
+                { 'mData': 'username', 'sTitle': '用户名'}  ,
+                { 'mData': 'ip', 'sTitle': 'IP地址'}  ,
                 { 'mData': 'id', 'sTitle': '操作'}
             ],
             'aoColumnDefs': [
@@ -118,13 +122,13 @@
                         //  console.log(data)
                         return  $('#tableActionTpl').render({id: data});
                     },
-                    'aTargets': [2 ]
+                    'aTargets': [6 ]
                 },
                 { bSortable: false,
-                    aTargets: [4]
-                },
+                    aTargets: [6]
+                }
                 //   { 'bVisible': false,  'aTargets': [ 1 ] },
-                { 'sClass': 'center', 'aTargets': [ 3 ] }
+              //  { 'sClass': 'center', 'aTargets': [ 3 ] }
             ],
             'sDom': 'rt<"table-footer clearfix"ip>',
             'bStateSave': false  , /**state saving **/
