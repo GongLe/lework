@@ -22,6 +22,8 @@ public class OperatingRecord extends IdEntity {
     private Date startDate;
     //操作结束时间
     private Date endDate;
+    //耗时
+    private Long  processingTime ;
     //操作目标
     private String operatingTarget;
     //ip地址
@@ -260,7 +262,14 @@ public class OperatingRecord extends IdEntity {
      */
     @Transient
     public String getStateName() {
-        return "";
+        return getState()==0?"异常":"正常";
     }
 
+    public Long getProcessingTime() {
+        return processingTime;
+    }
+
+    public void setProcessingTime(Long processingTime) {
+        this.processingTime = processingTime;
+    }
 }

@@ -51,6 +51,7 @@
 <!-- easyui css custom theme    -->
 <le:stylesheet src="/static/plugins/easyui/1.3.2/themes/bootstrap/easyui.custom.css"/>
 
+<!--系统javascript 原型扩充-->
 <le:javascript src="/static/plugins/lework.prototype.js" />
 <!--jquery -->
 <le:javascript src="/static/assets/js/jquery-1.10.2.js"/>

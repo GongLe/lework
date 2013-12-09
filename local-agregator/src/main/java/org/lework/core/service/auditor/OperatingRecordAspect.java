@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -42,10 +41,6 @@ public class OperatingRecordAspect {
     @Autowired
     private OperatingRecordManager operatingRecordManager;
 
-    @PostConstruct
-    public  void load(){
-        System.out.printf("load OperatingRecordAspect>>>>>>>>>>>>>>");
-    }
 
     /**
      * 在带有OperatingAudit注解的方法中监控执行过程
@@ -73,7 +68,7 @@ public class OperatingRecordAspect {
 
             if (parameter.size() > 0) {
 
-                sb.append("<h2>request参数</h2>").append("<hr>");
+                sb.append("<h3>request[Method:" + request.getMethod() + "]参数</h3>").append("<hr>");
                 //逐个循环参数和值添加到操作记录参数的描述字段中
                 for (Entry<String, Object> entry : parameter.entrySet()) {
                     sb.append("<p>").
@@ -96,12 +91,12 @@ public class OperatingRecordAspect {
         }
 
         String function = audit.function();
-        String module = "";
+        String module  = audit.value() ;
 
-        if (StringUtils.isEmpty(audit.value())) {
+     /*   if (StringUtils.isEmpty(module)) {
             OperatingAudit classAnnotation = Reflections.getAnnotation(method.getDeclaringClass(), OperatingAudit.class);
             module = classAnnotation == null ? "" : classAnnotation.value();
-        }
+        }*/
 
         record.setFunction(function);
         record.setModule(module);
@@ -109,6 +104,7 @@ public class OperatingRecordAspect {
         Object reaultValue = null;
 
         try {
+            //执行方法
             reaultValue = point.proceed();
             record.setState(1);
         } catch (Throwable e) {
@@ -123,12 +119,14 @@ public class OperatingRecordAspect {
             message = StringUtils.replace(message, "<", "&lt;");
             message = StringUtils.replace(message, "\r\n", "<br>");
 
-            sb.append("<h2>异常信息</h2>").append("<hr>").append(message).append("<hr>");
+            sb.append("<h3>异常信息</h3>").append("<hr>").append(message).append("<hr>");
             request.setAttribute("record", record);
             throw e;
         } finally {
             record.setEndDate(new Date());
             record.setRemark(sb.toString());
+            //计算处理时间
+            record.setProcessingTime(record.getEndDate().getTime() - record.getStartDate().getTime());
             operatingRecordManager.saveOperatingRecord(record);
         }
 

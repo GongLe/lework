@@ -26,10 +26,20 @@ public class SubjectUtils {
         return false;
     }
 
+    /**
+     * 判断当前会话是否登录
+     *
+     * @return boolean
+     */
+    public static boolean isAuthenticated() {
+        return SecurityUtils.getSubject().isAuthenticated();
+    }
+
     public static String getUserLoginName() {
         ShiroUser su = getUser();
         return su != null ? su.getLoginName() : null;
     }
+
     public static ShiroUser getUser() {
         Subject currentUser = getSubject();
         if (currentUser == null) {

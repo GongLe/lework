@@ -252,6 +252,10 @@
     font-size: 75%
 }
 
+.width-50px {
+    width: 50px;
+}
+
 .width-100px {
     width: 100px;
 }
@@ -430,7 +434,9 @@
 .overflow-visible {
     overflow: visible !important
 }
-
+ .display-none{
+     display: none;
+ }
 .hr {
     display: block;
     height: 0;

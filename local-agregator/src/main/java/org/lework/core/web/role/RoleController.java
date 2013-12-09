@@ -49,7 +49,7 @@ public class RoleController extends AbstractController {
     /**
      * list页面*
      */
-    @OperatingAudit(value = "角色管理",function = "查看操作")
+    @OperatingAudit(value = "角色管理",function = "查看")
     @RequestMapping(method = RequestMethod.GET)
     public String list() {
 
@@ -74,7 +74,7 @@ public class RoleController extends AbstractController {
     /**
      * 保存
      */
-    @OperatingAudit(value = "角色管理",function = "update操作")
+    @OperatingAudit(value = "角色管理",function = "保存")
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public void update(@Valid @ModelAttribute("entity") Role entity, BindingResult result,
                        @RequestParam(value = "groupId", required = false) String groupId,

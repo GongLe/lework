@@ -17,18 +17,19 @@
     <context:component-scan base-package="org.lework">
        <!-- <context:include-filter type="annotation" expression="org.aspectj.lang.annotation.Aspect"/>-->
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+        <context:exclude-filter type="annotation"  expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
     </context:component-scan>
 
     <!-- 定义aop Aspect自动代理 -->
     <aop:aspectj-autoproxy proxy-target-class="true"/>
 
-    <bean class="org.lework.core.service.auditor.LoggingAspect" />
     <!-- local cache -->
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
         <property name="shared" value="true"/>
         <property name="configLocation" value="classpath:cache/ehcache-local.xml"/>
     </bean>
+
+
 
 
     <!-- Jpa Entity Manager 配置 -->

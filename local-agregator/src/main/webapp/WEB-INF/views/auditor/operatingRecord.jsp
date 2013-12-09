@@ -4,7 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>系统日志</title>
+    <title>操作日志</title>
+
 </head>
 
 <body>
@@ -15,7 +16,7 @@
             <a href="${ctx}/dashboard" class="grey"> <i class="icon-home home-icon"></i></a>
         </li>
         <li class="active">
-           系统日志
+           操作日志
         </li>
     </ul>
     <!--.breadcrumb-->
@@ -28,11 +29,11 @@
 
             <div class="box box-bordered">
                 <div class="box-title no-margin-top"  >
-                    <h4 class="inner"><i class="icon-group"></i> 系统日志</h4>
+                    <h4 class="inner"><i class="icon-group"></i> 操作日志</h4>
                 </div>
-                <div class="box-content no-padding ">
+                <div class="box-content" style="padding-top: 5px;">
 
-                        <div class="table-funtion-bar clear-both"  >
+                        <div id="table-funtion-bar" class="table-funtion-bar clear-both" style="margin-bottom:25px;"  >
 
                             <div class="btn-group">
                                 <button data-toggle="dropdown"  class="btn no-border dropdown-toggle">
@@ -64,16 +65,55 @@
                                 <!--自定义搜索-->
                                 <form id="searchForm" name="searchForm" class="no-margin no-padding">
                                     <span class="input-icon input-icon-right">
-                                        <input class="input-medium" id="search" name="search" type="text" placeholder="名称/代码">
+                                        <input class="input-medium" id="search" name="search" type="text" placeholder="操作人">
                                         <i class="icon-search blue" onclick="$('#searchForm').submit()" ></i>
                                     </span>
                                 </form> <!--/#searchForm-->
                             </div>
 
+                            <div class="prop-attrs display-none" >
+                               <div class="attr">
+                                   <div class="row-fluid form-inline">
+                                       <div class="span4"> <label class="width-50px text-center">开始时间</label>
+                                           <input id="startDate" name="startDate" class="Wdate" type="text" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')}'})"/>
+                                       </div>
+                                       <div class="span4"><label class="width-50px text-center">结束时间</label>
+                                           <input id="endDate" name="endDate" class="Wdate" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startDate\')}',maxDate:'2020-10-01'})"/>
+                                       </div>
+                                       <div class="span4">
+                                           <label class="width-50px text-center">状态</label>
+                                        <select>
+                                            <option value="">全部</option>
+                                            <option value="0">异常</option>
+                                            <option value="1">正常</option>
+                                        </select>
+                                       </div>
+                                   </div>
+                               </div>
+                            </div>
+                            <div class="prop-attrs display-none">
+                                <div class="attr">
+                                    <div class="row-fluid form-inline">
+                                        <div class="span4"><label class="width-50px text-center"> IP </label>
+                                            <input name="ip" type="text"  placeholder="IP地址">
+                                        </div>
+                                        <div class="span4"><label class="width-50px text-center">模块名称</label> <input name="module" type="text"   placeholder="模块名称"></div>
+                                        <div class="span4 text-center">
+                                            <button id="doMoreSearch" class="btn btn-primary btn-small" >查询</button>
+                                            <button type="reset" class="btn  btn-small">重置</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="mb">
+                                 <div class="attr-extra">
+                                     <div class="inner-content"  id="moreSearch" ><a href="javascript:;">高级筛选</a>&nbsp;&nbsp;<i class="icon-angle-up"></i></div>
+                                 </div>
+                             </div>
                         </div> <!--/.table-funtion-bar-->
 
                         <table id="table-list"
-                               class="table table-hover  table-nomargin table-bordered dataTable dataTable-nosort clear-both">
+                               class="table table-hover table-striped  table-nomargin table-bordered dataTable dataTable-nosort clear-both">
                         </table>
                     </div>
 
@@ -84,9 +124,14 @@
 </div>
 
 <!--/.page-content-->
+<!--javascript Date增强版-->
+<script src="${ctx}/static/assets/js/xdate.js" ></script>
+<script src="${ctx}/static/plugins/My97DatePicker/WdatePicker.js" ></script>
 <script>
+
     var oTable = $('#table-list');
     $(function () {
+
         //表单提交后,iframe回调函数
         window.actionCallback = function (resp) {
             var json =  resp.attributes ;
@@ -100,6 +145,12 @@
             oTable.fnDraw();
             lework.alert({content:json.message ,type: json.type })
         };
+        //高级搜索
+        $('#moreSearch').click(function(){
+              $('#table-funtion-bar .display-none').slideToggle()
+            var $icon = $(this).siblings('i');
+            $icon.toggleClass('icon-angle-down')
+        })
       //搜索表单
       $('#searchForm').submit(function(event){
           event.preventDefault() ;
@@ -108,29 +159,44 @@
         oTable.dataTable({
             'aoColumns': [
                 { 'mData': 'module', 'sTitle': '模块' },
-                { 'mData': 'startDate', 'sTitle': '操作开始时间' },
-                { 'mData': 'endDate', 'sTitle': '操作结束时间'}  ,
                 { 'mData': 'function', 'sTitle': '动作'}  ,
-                { 'mData': 'username', 'sTitle': '用户名'}  ,
+                { 'mData': 'operatingTarget', 'sTitle': '操作记录'}  ,
+                { 'mData': 'startDate', 'sTitle': '操作时间' },
+                { 'mData': 'processingTime', 'sTitle': '耗时'}  ,
+                { 'mData': 'username', 'sTitle': '操作人'}  ,
                 { 'mData': 'ip', 'sTitle': 'IP地址'}  ,
                 { 'mData': 'id', 'sTitle': '操作'}
             ],
             'aoColumnDefs': [
+                {
+                    'mRender': function (startDate, type, full) {
 
+                        return  (new XDate(startDate) ).toString('yyyy/MM/dd HH:mm:ss');
+                    },
+                    'aTargets': [3 ]
+                },
+                {
+                    'mRender': function (processingTime, type, full) {
+
+                        return  (processingTime / 1000 % 60) > 1.0 ? ((processingTime / 1000 % 60) + '秒') : (   processingTime  + '毫秒');
+                    },
+                    'aTargets': [4]
+                },
                 {
                     'mRender': function (data, type, full) {
                         //  console.log(data)
                         return  $('#tableActionTpl').render({id: data});
                     },
-                    'aTargets': [6 ]
+                    'aTargets': [7 ]
                 },
                 { bSortable: false,
-                    aTargets: [6]
+                    aTargets: [7]
                 }
                 //   { 'bVisible': false,  'aTargets': [ 1 ] },
               //  { 'sClass': 'center', 'aTargets': [ 3 ] }
             ],
             'sDom': 'rt<"table-footer clearfix"ip>',
+            "aaSorting": [[ 3, "desc" ]],   //默认排序
             'bStateSave': false  , /**state saving **/
             'bProcessing': true ,
             'bServerSide': true,
@@ -161,6 +227,11 @@
                 checkFunbarStatus(size > 0);
             }
         });
+        //双击进入详情页面
+        oTable.on('dblclick','tbody>tr',function(event){
+            event.preventDefault();
+            $(this).find('.view').trigger('click');
+        });
 
         //刷新
         $('#refresh-function').click(function () {
@@ -183,10 +254,10 @@
         function checkFunbarStatus(hasSelected) {
             if (hasSelected == true) {
                 $('#checkIcon').removeClass('icon-check-empty').addClass('icon-check')
-                $('#delete-function').show();
+              //  $('#delete-function').show();
             } else {
                 $('#checkIcon').removeClass('icon-check').addClass('icon-check-empty');
-                $('#delete-function').hide();
+             //   $('#delete-function').hide();
             }
         }
 

@@ -59,7 +59,7 @@ public class OperatingRecordController {
 
         List<SearchFilter> filters = SearchFilter.buildFromHttpRequest(request);
         if (Strings.isNotBlank(search)) {
-            filters.add(new SearchFilter("LIKES_name_OR_code", search));
+            filters.add(new SearchFilter("LIKES_username", search));
         }
         Page<OperatingRecord> page = operatingRecordManager.searchPageOperatingRecord(pageable, filters);
 
