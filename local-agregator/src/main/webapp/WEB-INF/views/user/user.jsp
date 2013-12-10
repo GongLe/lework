@@ -210,7 +210,7 @@
         });
 
         //重置密码
-        $('#resetPassword-function').click(function () {
+        $('#resetPassword-function').on('click',function () {
             var ids = [];
             oTable.find('tr.selected .confirmDelete').each(function () {
                 ids.push($(this).data('id'))
@@ -224,7 +224,7 @@
             })
         });
          //新建
-        $('#create-function').click(function () {
+        $('#create-function').on('click',function () {
             $(this).colorbox({
                 href :'user/update?$SiteMesh=false' ,
                 adjustY:'40%',
@@ -234,7 +234,7 @@
             })
         });
         //刷新
-        $('#refresh-function').click(function () {
+        $('#refresh-function').on('click',function () {
             oTable.fnDraw();
             //重置function bar状态
             checkFunbarStatus(false);
@@ -263,12 +263,12 @@
         });
 
         //取消选择
-        $('#cancelSelected').click(function () {
+        $('#cancelSelected').on('click',function () {
             oTable.find('tbody>tr').removeClass('selected warning');
             checkFunbarStatus(false);
         });
         //全选行
-        $('#selectedAll').click(function () {
+        $('#selectedAll').on('click',function () {
             oTable.find('tbody>tr').addClass('selected warning')
             checkFunbarStatus(true);
         });

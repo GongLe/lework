@@ -2,10 +2,7 @@
 <%@ include file="/WEB-INF/included/taglibs.jsp" %>
 <!DOCTYPE html>
 <html>
-<head>
-
-</head>
-
+<head></head>
 <body>
 
 <div class="modal-content" >

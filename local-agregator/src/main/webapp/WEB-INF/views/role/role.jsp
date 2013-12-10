@@ -128,9 +128,9 @@
                 {
                     'mRender': function (data, type, full) {
                         if (data == 'enable') {
-                            return   '<i class="icon-flag bigger-130 green" title="启用的"></i>';
+                            return   '<i class="icon-ok-sign bigger-130 green" title="启用的"></i>';
                         }
-                        return    '<i class="icon-flag bigger-130 red" title="禁用的"></i>';
+                        return    '<i class="icon-ok-sign bigger-130 red" title="禁用的"></i>';
                     },
                     'aTargets': [3 ]
                 },
@@ -189,7 +189,7 @@
         });
 
         //新增
-        $('#create-function').click(function () {
+        $('#create-function').on('click',function () {
             var roleGroup  = $('#orgTree').tree('getSelected') ;
             var roleGroupId = (roleGroup && roleGroup['id']) ? roleGroup.id : '' ;
             $(this).colorbox({
@@ -201,7 +201,7 @@
             })
         });
         //刷新
-        $('#refresh-function').click(function () {
+        $('#refresh-function').on('click',function () {
             oTable.fnDraw();
 
         });
@@ -228,12 +228,12 @@
         }
         });
         //取消选择
-        $('#cancelSelected').click(function () {
+        $('#cancelSelected').on('click',function () {
             oTable.find('tbody>tr').removeClass('selected warning');
             checkFunbarStatus(false);
         });
         //全选行
-        $('#selectedAll').click(function () {
+        $('#selectedAll').on('click',function () {
             oTable.find('tbody>tr').addClass('selected warning')
             checkFunbarStatus(true);
         });

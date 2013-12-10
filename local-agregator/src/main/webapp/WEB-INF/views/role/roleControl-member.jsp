@@ -119,13 +119,13 @@
         });//dataTables
 
         //搜索表单
-        $('#userSearchForm').submit(function (event) {
+        $('#userSearchForm').on('submit',function (event) {
             event.preventDefault();
             userTable.fnDraw();
         });
 
         //添加用户到角色
-        $('#addMember-function').click(function () {
+        $('#addMember-function').on('click',function () {
 
             $(this).colorbox({
                 href: 'roleControl/addMember?' + $.param({'$SiteMesh': false, 'roleId': roleId}),
@@ -140,7 +140,7 @@
             })
         })
         //刷新
-        $('#refresh-function').click(function () {
+        $('#refresh-function').on('click',function () {
             userTable.fnDraw();
         })
 

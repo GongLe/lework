@@ -54,7 +54,7 @@
          */
         function createRoleRelateMenu(param) {
 
-            $.hiddenSubmit({
+            $.hiddenSubmit( {
                 formAction: 'menu/createRelateRole',
                 data: [
                     {name: 'menuId', value: param.menuId } ,
@@ -69,7 +69,7 @@
          *解除菜单与角色关联关系
          */
         function removeRoleRelatedMenu(param) {
-            $.hiddenSubmit({
+            $.hiddenSubmit( {
                 formAction: 'menu/removeRelatedRole',
                 data: [
                     {name: 'menuId', value: param.menuId } ,

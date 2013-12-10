@@ -51,9 +51,6 @@
                                 </ul>
                             </div>
                             <div class="btn-group">
-                                <button class="btn no-border tooltips" id="create-function" data-original-title="新增" >
-                                    <i class="icon-plus"></i>
-                                </button>
                                 <button class="btn no-border tooltips" id="refresh-function" data-original-title="刷新">
                                     <i class="icon-refresh"></i>
                                 </button>
@@ -61,7 +58,7 @@
                                     <i class="icon-trash"></i>
                                 </button>
                             </div>
-                            <div class="input-append no-margin-bottom pull-right">
+                            <div class="input-append no-margin-bottom pull-right"  style="padding-right: 50px;">
                                 <!--自定义搜索-->
                                 <form id="searchForm" name="searchForm" class="no-margin no-padding">
                                     <span class="input-icon input-icon-right">
@@ -73,38 +70,50 @@
 
                             <div class="prop-attrs display-none" >
                                <div class="attr">
+                                   <form id="formRegionLevel1" class="no-margin">
                                    <div class="row-fluid form-inline">
                                        <div class="span4"> <label class="width-50px text-center">开始时间</label>
-                                           <input id="startDate" name="startDate" class="Wdate" type="text" onFocus="WdatePicker({maxDate:'#F{$dp.$D(\'endDate\')}'})"/>
+                                           <input id="startDate" name="filter_GTED_startDate" class="Wdate" type="text" placeholder="开始时间"
+                                                  onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',maxDate:'#F{$dp.$D(\'endDate\')}'})"/>
                                        </div>
                                        <div class="span4"><label class="width-50px text-center">结束时间</label>
-                                           <input id="endDate" name="endDate" class="Wdate" type="text" onFocus="WdatePicker({minDate:'#F{$dp.$D(\'startDate\')}',maxDate:'2020-10-01'})"/>
+                                           <input id="endDate" name="filter_LTED_endDate" class="Wdate" type="text" placeholder="结束时间"
+                                                  onFocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'#F{$dp.$D(\'startDate\')}',maxDate:'2020-10-01'})"/>
                                        </div>
                                        <div class="span4">
                                            <label class="width-50px text-center">状态</label>
-                                        <select>
+                                        <select name="filter_EQS_state">
                                             <option value="">全部</option>
                                             <option value="0">异常</option>
                                             <option value="1">正常</option>
                                         </select>
                                        </div>
                                    </div>
+                                   </form>
                                </div>
                             </div>
                             <div class="prop-attrs display-none">
                                 <div class="attr">
+                                    <form id="formRegionLevel2" class="no-margin">
                                     <div class="row-fluid form-inline">
                                         <div class="span4"><label class="width-50px text-center"> IP </label>
-                                            <input name="ip" type="text"  placeholder="IP地址">
+                                            <input name="filter_LIKES_ip" type="text"  placeholder="IP地址">
                                         </div>
-                                        <div class="span4"><label class="width-50px text-center">模块名称</label> <input name="module" type="text"   placeholder="模块名称"></div>
+                                        <div class="span4"><label class="width-50px text-center">模块名称</label> <input name="filter_LIKES_module" type="text"   placeholder="模块名称"></div>
                                         <div class="span4 text-center">
-                                            <button id="doMoreSearch" class="btn btn-primary btn-small" >查询</button>
-                                            <button type="reset" class="btn  btn-small">重置</button>
+                                            <button id="doMoreSearch" type="button" class="btn btn-primary btn-small">
+                                                查询
+                                            </button>
+                                            <button type="button" class="btn  btn-small"
+                                                    onclick="document.getElementById('formRegionLevel1').reset();document.getElementById('formRegionLevel2').reset();">
+                                                重置
+                                            </button>
                                         </div>
                                     </div>
+                                   </form>
                                 </div>
                             </div>
+
                              <div class="mb">
                                  <div class="attr-extra">
                                      <div class="inner-content"  id="moreSearch" ><a href="javascript:;">高级筛选</a>&nbsp;&nbsp;<i class="icon-angle-up"></i></div>
@@ -134,21 +143,22 @@
 
         //表单提交后,iframe回调函数
         window.actionCallback = function (resp) {
-            var json =  resp.attributes ;
+            var json = resp.attributes;
             $.colorbox.close();
             oTable.fnDraw();
             lework.alert({content: json.message, type: json.type })
         };
         window.deleteCallback = function (resp) {
-            var json =  resp.attributes ;
+            var json = resp.attributes;
             $.colorbox.close();
             oTable.fnDraw();
-            lework.alert({content:json.message ,type: json.type })
+            lework.alert({content: json.message, type: json.type })
         };
         //高级搜索
-        $('#moreSearch').click(function(){
-              $('#table-funtion-bar .display-none').slideToggle()
+        $('#moreSearch').on('click', function () {
+            $('#table-funtion-bar .display-none').slideToggle()
             var $icon = $(this).siblings('i');
+            console.log($icon)
             $icon.toggleClass('icon-angle-down')
         })
       //搜索表单
@@ -156,6 +166,10 @@
           event.preventDefault() ;
           oTable.fnDraw();
       });
+        //高级筛选
+        $('#doMoreSearch').on('click',function(){
+            oTable.fnDraw();
+        })
         oTable.dataTable({
             'aoColumns': [
                 { 'mData': 'module', 'sTitle': '模块' },
@@ -178,13 +192,12 @@
                 {
                     'mRender': function (processingTime, type, full) {
 
-                        return  (processingTime / 1000 % 60) > 1.0 ? ((processingTime / 1000 % 60) + '秒') : (   processingTime  + '毫秒');
+                        return   (processingTime / 1000 % 60) > 1.0 ? ((processingTime / 1000 % 60) + '  秒') : (   processingTime  + '  毫秒');
                     },
                     'aTargets': [4]
                 },
                 {
                     'mRender': function (data, type, full) {
-                        //  console.log(data)
                         return  $('#tableActionTpl').render({id: data});
                     },
                     'aTargets': [7 ]
@@ -193,20 +206,19 @@
                     aTargets: [7]
                 }
                 //   { 'bVisible': false,  'aTargets': [ 1 ] },
-              //  { 'sClass': 'center', 'aTargets': [ 3 ] }
+              //     { 'sClass': 'center', 'aTargets': [ 3 ] }
             ],
             'sDom': 'rt<"table-footer clearfix"ip>',
-            "aaSorting": [[ 3, "desc" ]],   //默认排序
+            "aaSorting": [ [ 3, "desc" ] ],   //默认排序
             'bStateSave': false  , /**state saving **/
             'bProcessing': true ,
             'bServerSide': true,
             'fnServerData': lework.springDataJpaPageableAdapter,
             'sAjaxSource': '${ctx}/operatingRecord/getDatatablesJson',
             'fnServerParams' :function(aoData ){
-                var selectedNode = $.fn.tree && $('#orgTree').tree('getSelected');
-                if (selectedNode)
-                    aoData.push({ 'name': 'filter_EQS_groupId', 'value': selectedNode.id  });
                 //自定义参数
+                aoData.pushArray($('#formRegionLevel1').serializeArray());
+                aoData.pushArray($('#formRegionLevel2').serializeArray());
                 aoData.pushArray($('#searchForm').serializeArray());
             },
             'fnInitComplete': function () {     /**datatables ready**/
@@ -234,18 +246,18 @@
         });
 
         //刷新
-        $('#refresh-function').click(function () {
+        $('#refresh-function').on('click',function () {
             oTable.fnDraw();
 
         });
 
         //取消选择
-        $('#cancelSelected').click(function () {
+        $('#cancelSelected').on('click',function () {
             oTable.find('tbody>tr').removeClass('selected warning');
             checkFunbarStatus(false);
         });
         //全选行
-        $('#selectedAll').click(function () {
+        $('#selectedAll').on('click',function () {
             oTable.find('tbody>tr').addClass('selected warning')
             checkFunbarStatus(true);
         });

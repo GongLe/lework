@@ -103,14 +103,14 @@
     $(function () {
         //test easyui
         using(['menu', 'messager','tree','combobox','treegrid'], function () {
-            $('#confirm1').click(function () {
+            $('#confirm1').on('click',function () {
                 $.messager.confirm('My Title', 'Are you confirm this?', function (res) {
                     if (res) {
                         alert('confirmed: ' + res);
                     }
                 });
             })
-            $('#prompt1').click(function () {
+            $('#prompt1').on('click',function () {
                 $.messager.prompt('My Title', 'Please type something', function (res) {
                     if (res) {
                         alert('you type: ' + res);

@@ -28,29 +28,34 @@
               </thead>
               <tbody>
               <tr>
-                  <td> <code>操作人</code> </td>  <td> ${entity.username}</td>
+                  <td>操作人 </td>  <td>  <code>${entity.username}</code></td>
               </tr>
               <tr>
-                  <td> <code>IP</code> </td>  <td> ${entity.ip}</td>
+                  <td>IP </td>  <td>  <code>${entity.ip}</code></td>
               </tr>
               <tr>
-                  <td> <code>操作目标</code> </td>  <td> ${entity.operatingTarget}</td>
+                  <td>操作目标 </td>  <td> <code> ${entity.operatingTarget}</code></td>
               </tr>
               <tr class="<c:if test="${entity.state == 0}">error</c:if>" >
-                  <td> <code>状态</code> </td>  <td><c:if test="${entity.state == 0}">异常</c:if> <c:if test="${entity.state == 1}">正常</c:if> </td>
+                  <td>状态 </td>
+                  <td>
+                      <code>
+                  <c:if test="${entity.state == 0}">异常</c:if> <c:if test="${entity.state == 1}">正常</c:if>
+                      </code>
+                 </td>
               </tr>
               <tr>
-                  <td> <code>模块名称</code> </td>  <td> ${entity.module}</td>
+                  <td>模块名称 </td>  <td> <code> ${entity.module}</code></td>
               </tr>
               <tr>
-                  <td> <code>功能名称</code> </td>  <td> ${entity.function}</td>
+                  <td>功能名称 </td>  <td>  <code>${entity.function}</code></td>
               </tr>
 
               <tr>
-                  <td> <code>耗时</code> </td>  <td> ${entity.processingTime}(毫秒)</td>
+                  <td>耗时 </td>  <td>  <code>${entity.processingTime}(毫秒)</code></td>
               </tr>
               <tr>
-                  <td> <code>请求详情</code> </td>  <td> ${entity.remark}</td>
+                  <td>请求详情 </td>  <td>   ${entity.remark} </td>
               </tr>
 
               </tbody>
@@ -69,7 +74,7 @@
 <script>
     $(function(){
         $('#logInputBody').slimscroll({
-            height:'500px'
+            height:'400px'
         }); //slimscroll
     })  //dom ready
 </script>

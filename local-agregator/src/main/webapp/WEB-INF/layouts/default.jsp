@@ -27,6 +27,11 @@
     <%@ include file="/WEB-INF/included/sidebar.jsp" %>
     <div class="main-content">
         <sitemesh:body></sitemesh:body>
+        <div id="main-footer">
+            <div class="innerContent">
+                innerContent :: footer
+            </div>
+        </div>
     </div> <!--/.main-content-->
 </div> <!--/.main-container-->
 </body>

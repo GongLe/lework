@@ -163,7 +163,7 @@ $(function(){
     //监听序号调整
     var listenerSortAction = function(){
         var id ;
-        $('.sortNumAction' ,'#menuTreeGridWrap').click(function(event){
+        $('.sortNumAction' ,'#menuTreeGridWrap').on('click',function(event){
             event.preventDefault() ;
             if($(this).hasClass('up')){   //上移
                 $.blockUI();
@@ -184,7 +184,7 @@ $(function(){
         })
     }  //listenerSortAction
     //新增
-    $('#create-function').click(function () {
+    $('#create-function').on('click',function () {
         $(this).colorbox({
             href :'menu/update?$SiteMesh=false' ,
             adjustY:'40%',
@@ -195,13 +195,13 @@ $(function(){
         })
     });
     //刷新
-    $('#refresh-function').click(function () {
+    $('#refresh-function').on('click',function () {
         $('#menuTreeGrid').treegrid('reload');
         //重置function bar状态
         checkFunbarStatus(false);
     });
     //编辑
-    $('#update-function').click(function () {
+    $('#update-function').on('click',function () {
        var row =   $menuTreeGrid.treegrid('getSelected');
         //双击编辑
         $.colorbox({
@@ -227,7 +227,7 @@ $(function(){
         }
     });
     //添加菜单到角色
-    $('#addToRole-function').click(function () {
+    $('#addToRole-function').on('click',function () {
         //当前选中的菜单
         var selectRow =  $menuTreeGrid.treegrid('getSelected');
         $(this).colorbox({

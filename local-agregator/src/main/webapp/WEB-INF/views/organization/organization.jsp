@@ -165,7 +165,7 @@
     //监听序号调整
     var listenerSortAction = function(){
         var id ;
-        $('.sortNumAction' ,'#orgTreeGridWrap').click(function(event){
+        $('.sortNumAction' ,'#orgTreeGridWrap').on('click',function(event){
             event.preventDefault() ;
             if($(this).hasClass('up')){   //上移
                 $.blockUI();
@@ -186,7 +186,7 @@
         })
     }  //listenerSortAction
     //新增
-    $('#create-function').click(function () {
+    $('#create-function').on('click',function () {
         $(this).colorbox({
             href :'organization/update?$SiteMesh=false' ,
             adjustY:'40%',
@@ -197,7 +197,7 @@
         })
     });
     //刷新
-    $('#refresh-function').click(function () {
+    $('#refresh-function').on('click',function () {
         $('#orgTreeGrid').treegrid('reload');
         //重置function bar状态
         checkFunbarStatus(false);
