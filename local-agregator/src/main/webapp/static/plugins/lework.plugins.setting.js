@@ -36,47 +36,43 @@ $(function () {
                     .css({width: 180});
             }
 
-            //适配Spring data jpa page 参数
+            /**适配Spring data jpa page 参数
+             * @link{http://docs.spring.io/spring-data/jpa/docs/1.4.2.RELEASE/reference/html/repositories.html}
+             */
             lework.springDataJpaPageableAdapter = function (sSource, aoData, fnCallback, oSettings) {
-
 
                 //extract name/value pairs into a simpler map for use later
                 var paramMap = {};
                 for (var i = 0; i < aoData.length; i++) {
                     paramMap[aoData[i].name] = aoData[i].value;
                 }
-
-
+                var colSize = parseInt(paramMap['iColumns']);
                 //page calculations ,仅支持单列排序
                 var pageSize = paramMap.iDisplayLength;
                 var start = paramMap.iDisplayStart;
                 var pageNum = (start == 0) ? 1 : (start / pageSize) + 1; // pageNum is 1 based
+                //排序的列索引
+                var sortColsDetail = [] , indexTemp;
 
-                // extract sort information
-                var sortCol, sortDir, sortName;
-                for (var i = 0; i < parseInt(paramMap['iColumns']); i++) {
-
-                    if (paramMap['bSortable_' + i] == true && paramMap['iSortCol_0'] == i) {
-                        sortCol = i;
-                        sortName = paramMap['mDataProp_' + i];
-                        sortDir = paramMap['sSortDir_0' ];
+                //计算排序列,最多支持{colSize}次排序
+                for (var j = 0; j < colSize; j++) {
+                    indexTemp = paramMap['iSortCol_' + j ];
+                    if (!indexTemp) {
                         break;
                     }
+                    sortColsDetail.push(paramMap['mDataProp_' + indexTemp ] + ',' + paramMap['sSortDir_' + j ])
                 }
 
                 //create new json structure for parameters for REST request
                 // var restParams = [] ;
                 var restParams = aoData;
-          /*    @see http://docs.spring.io/spring-data/jpa/docs/1.4.2.RELEASE/reference/html/repositories.html
-                restParams.push({'name': 'page.size', 'value': pageSize});
-                restParams.push({'name': 'page.page', 'value': pageNum });
-                restParams.push({'name': 'page.sort', 'value': sortName });
-                restParams.push({'name': 'page.sort.dir', 'value': sortDir ? sortDir : 'asc' }); */
-
-                sortName = (sortName + ',' + (sortDir ? sortDir : 'asc' ) ) ;
                 restParams.push({'name': 'size', 'value': pageSize  });
-                restParams.push({'name': 'page', 'value': pageNum -1});
-                restParams.push({'name': 'sort', 'value': sortName });
+                restParams.push({'name': 'page', 'value': pageNum - 1});
+                //  restParams.push({'name': 'sort', 'value': sortName });
+                //写入排序
+                for (var i = 0; i < sortColsDetail.length; i++) {
+                    restParams.push({'name': 'sort', 'value': sortColsDetail[i] })
+                }
                 //finally, make the request
                 oSettings.jqXHR = $.ajax({
                     'dataType': 'json',
