@@ -139,8 +139,8 @@
                 { 'mData': 'name', 'sTitle': '姓名' },
                 { 'mData': 'loginName', 'sTitle': '用户名'}  ,
                 { 'mData': 'email', 'sTitle': 'Email'}  ,
+                { 'mData': 'orgName', 'sTitle': '所属部门'}  ,
                 { 'mData': 'status', 'sTitle': '状态'}  ,
-                { 'mData': 'createdBy', 'sTitle': '创建人'}  ,
                 { 'mData': 'id', 'sTitle': '操作'}
             ],
             'aoColumnDefs': [
@@ -148,11 +148,11 @@
                     'mRender': function (data, type, full) {
                         //  console.log(data)
                         if (data == 'enable') {
-                            return   '<i class="icon-flag bigger-130 green" title="启用的"></i>';
+                            return   '<i class="icon-ok-sign bigger-130 green" title="启用的"></i>';
                         }
-                        return    '<i class="icon-flag bigger-130 red" title="禁用的"></i>';
+                        return    '<i class="icon-ok-sign bigger-130 red" title="禁用的"></i>';
                     },
-                    'aTargets': [3 ]
+                    'aTargets': [4 ]
                 },
                 {
                     'mRender': function (data, type, full) {
@@ -165,7 +165,7 @@
                     aTargets: [5]
                 } ,
                 //   { 'bVisible': false,  'aTargets': [ 1 ] },
-                { 'sClass': 'center', 'aTargets': [3] }
+                { 'sClass': 'center', 'aTargets': [4] }
             ],
             'sDom': 'rt<"table-footer clearfix"ip>',
             'bStateSave': false  , /**state saving **/

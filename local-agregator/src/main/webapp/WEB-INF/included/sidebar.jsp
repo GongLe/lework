@@ -9,7 +9,6 @@
             session.setAttribute("menuList", user.getMenus());
         }
     }
-
 %>
 
 <div class="sidebar" id="sidebar">
@@ -24,7 +23,7 @@
     <%-- 三级级菜单循环输出--%>
     <c:forEach items="${sessionScope.menuList}" var="menu">
         <li>
-            <a href="${ctx}/${menu.url}" data-menu-id="${menu.id}"  <c:if test="${  menu.hasChild eq 'true' }">class="dropdown-toggle" </c:if> >
+            <a href="${ctx}${menu.url}" data-menu-id="${menu.id}"  id="${menu.id}"  <c:if test="${  menu.hasChild eq 'true' }">class="dropdown-toggle" </c:if> >
                 <c:if test="${not empty menu.icon}">
                     <i class="${menu.icon}"></i>
                 </c:if>
@@ -39,7 +38,7 @@
                     <c:forEach items="${menu.childrenMenus}" var="subMenu">
 
                         <li>
-                            <a href="${ctx}/${subMenu.url}" data-menu-id="${subMenu.id}"
+                            <a href="${ctx}${subMenu.url}" data-menu-id="${subMenu.id}"  id="${subMenu.id}"
                                <c:if test="${not empty subMenu.childrenMenus }">class="dropdown-toggle" </c:if> >
                                 <c:if test="${not empty subMenu.icon}">
                                     <i class="${subMenu.icon}"></i>
@@ -54,7 +53,7 @@
                                 <ul class="submenu">
                                     <c:forEach items="${subMenu.childrenMenus}" var="subMenu3">
                                         <li>
-                                            <a href="${ctx}/${subMenu3.url}" data-menu-id="${subMenu3.id}"
+                                            <a href="${ctx}${subMenu3.url}" data-menu-id="${subMenu3.id}"  id="${subMenu3.id}"
                                                <c:if test="${subMenu3.hasChild == true}">class="dropdown-toggle" </c:if> >
                                                 <c:if test="${not empty subMenu3.icon}">
                                                     <i class="${subMenu3.icon}"></i>
@@ -158,3 +157,18 @@
 </div>
 </div>
 <!--./sidebar-->
+<script>
+    (function(){
+        //设置当前菜单ID
+        $('#sidebar').on('click','a',function(){
+            //写入大概二十分钟cookie
+            $(this).data('menuId') &&  $.cookie('curMenuId', $(this).data('menuId') ,{expires : 0.015})
+        })
+        var curMenuId = $.cookie('curMenuId') ,  $this ;
+        if(curMenuId) {
+            $this = $('#' + curMenuId);
+            $this.parent('li').addClass('active')
+            $this.parents('ul.submenu').length >0   &&  $this.parents('ul.submenu').parent('li').addClass('active open')
+        }
+    })()
+</script>

@@ -56,7 +56,7 @@
 <!--jquery -->
 <le:javascript src="/static/assets/js/jquery-1.10.2.js"/>
 <le:javascript src="/static/assets/js/jquery-migrate-1.2.1.js"/>
-
+<le:javascript src="/static/plugins/jquery.cookie.js"/>
 <script>
     if ("ontouchend" in document) document.write("<script src=${ctx}/static/assets/js/jquery.mobile.custom.js'>" + "<" + "/script>");
 

@@ -39,7 +39,7 @@
                     <div class="table-funtion-bar clear-both">
                         <div class="btn-group">
                             <button class="btn no-border tooltips" id="create-function" data-original-title="新增" >
-                                <i class="icon-plus"></i>
+           N                     <i class="icon-plus"></i>
                             </button>
                             <button class="btn no-border tooltips" id="refresh-function" data-original-title="刷新">
                                 <i class="icon-refresh"></i>

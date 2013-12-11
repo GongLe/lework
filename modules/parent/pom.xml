@@ -21,7 +21,7 @@
         <tomcat-jdbc.version>7.0.47</tomcat-jdbc.version>
         <sitemesh.version>2.4.2</sitemesh.version>
         <shiro.version>1.2.2</shiro.version>
-        <cxf.version>2.7.6</cxf.version>
+        <cxf.version>2.7.7</cxf.version>
         <activemq.version>5.7.0</activemq.version>
         <quartz.version>2.2.0</quartz.version>
         <jedis.version>2.1.0</jedis.version>
@@ -73,7 +73,15 @@
             <url>http://localhost:8081/nexus/content/groups/public</url>
         </repository>
         -->
-        <!-- BAE maven repository
+        <repository>
+            <id>maven2</id>
+            <name>maven2 Repository</name>
+            <!--  <url>http://repo1.maven.org/maven2</url>-->
+            <!--指定IP访问速度更快-->
+            <url>http://72.21.81.253/maven2</url>
+        </repository>
+
+        <!-- BAE maven repository   -->
         <repository>
             <id>baemaven</id>
             <name>BAE Maven</name>
@@ -81,7 +89,8 @@
             <releases>
                 <enabled>true</enabled>
             </releases>
-        </repository>  -->
+        </repository>
+
     </repositories>
 
     <!-- 预定义依赖项的version,scope与exclusions,子项目中只需定义groupId 和 artifactId 即可 -->
@@ -775,28 +784,30 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- 如有Nexus私服, 取消注释并指向正确的服务器地址.
-    <pluginRepositories>
-        <pluginRepository>
-            <id>nexus</id>
-            <name>Team Nexus Repository</name>
-            <url>http://localhost:8081/nexus/content/groups/public</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
-    -->
     <!-- BAE maven pluginRepository-->
     <pluginRepositories>
-       <!-- <pluginRepository>
+        <pluginRepository>
             <id>baemaven</id>
             <name>BAE Maven</name>
             <url>http://maven.duapp.com/nexus/content/groups/public/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
-        </pluginRepository>-->
+        </pluginRepository>
+
+        <pluginRepository>
+            <id>central2</id>
+            <name>Maven Plugin Repository</name>
+            <url>http://72.21.81.253/maven2</url>
+            <layout>default</layout>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <updatePolicy>never</updatePolicy>
+            </releases>
+        </pluginRepository>
+
     </pluginRepositories>
 
     <!-- 插件配置 -->

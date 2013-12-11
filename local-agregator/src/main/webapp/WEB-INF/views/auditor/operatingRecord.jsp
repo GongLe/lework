@@ -157,8 +157,7 @@
         //高级搜索
         $('#moreSearch').on('click', function () {
             $('#table-funtion-bar .display-none').slideToggle()
-            var $icon = $(this).siblings('i');
-            console.log($icon)
+            var $icon = $(this).children('i');
             $icon.toggleClass('icon-angle-down')
         })
       //搜索表单

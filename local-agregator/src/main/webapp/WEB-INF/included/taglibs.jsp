@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="/WEB-INF/tld/spring-form.tld" %>
-<%@ taglib prefix="le" uri="/WEB-INF/tld/le-taglib.tld" %>
+<%@ taglib prefix="le" uri="/WEB-INF/tld/lework-taglib.tld" %>
 
 
 <%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
