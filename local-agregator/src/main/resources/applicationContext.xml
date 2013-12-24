@@ -71,6 +71,19 @@
     <!-- JSR303 Validator定义 -->
     <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
+    <!-- BAE环境 -->
+    <beans profile="bae">
+        <context:property-placeholder ignore-resource-not-found="true"
+                                      location="classpath*:/application.properties,classpath*:/application.development.properties" />
+        <!-- BAE JDBC连接池 -->
+
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName" value="${bae.jdbc.driver}" />
+            <property name="url" value="${bae.jdbc.url}" />
+            <property name="username" value="${bae.jdbc.username}" />
+            <property name="password" value="${bae.jdbc.password}" />
+        </bean>
+    </beans>
 
     <!-- production环境 -->
     <beans profile="production">
