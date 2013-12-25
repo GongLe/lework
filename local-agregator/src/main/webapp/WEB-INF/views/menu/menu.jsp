@@ -39,7 +39,7 @@
                     <div class="table-funtion-bar clear-both">
                         <div class="btn-group">
                             <button class="btn no-border tooltips" id="create-function" data-original-title="新增" >
-           N                     <i class="icon-plus"></i>
+                              <i class="icon-plus"></i>
                             </button>
                             <button class="btn no-border tooltips" id="refresh-function" data-original-title="刷新">
                                 <i class="icon-refresh"></i>
@@ -59,10 +59,10 @@
                     </div><!--/.table-funtion-bar-->
 
                     <div class="pull-left" id="menuTreeGridWrap">
-                        <table id="menuTreeGrid" style="width:540px;height:500px;" ></table>
+                        <table id="menuTreeGrid" style="width:640px;height:500px;" ></table>
                     </div>
 
-                    <div id="eastMenuRelated"  style="margin-left:526px;padding:0 20px 0 20px;">
+                    <div id="eastMenuRelated"  style="margin-left:626px;padding:0 20px 0 20px;">
                         加载中...
                     </div><!--/.eastMenuRelated-->
                 </div>
@@ -110,7 +110,14 @@ $(function(){
                 [
                     {field: 'name', title: '菜单名称', width: 150},
                     /*   {field: 'code', title: '菜单代码', width: 115, align: 'left'},*/
-                    {field: 'url', title: 'URL', width: 260} ,
+                    {field: 'url', title: 'URL', width: 290} ,
+                    {field: 'status', title: '状态', align: 'center', width: 60, formatter: function (data, row) {
+                        if (data == 'enable') {
+                            return   '<i class="icon-ok-sign green" title="启用的"></i>';
+                        }
+                        return    '<i class="icon-remove-circle  red" title="禁用的"></i>';
+                    }
+                    },
                     {field: 'id', title: '序号', align: 'left', width: 100, formatter: function (value, row) {
                         var html = '&nbsp;&nbsp;&nbsp;&nbsp;';
                         if (row.levelIndex > 0) {

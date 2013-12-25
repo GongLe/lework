@@ -5,8 +5,6 @@ import java.util.Map;
 
 /**
  * Do not cache
- * @param <K>
- * @param <V>
  */
 public final class NoCache implements Cache {
     @Override
@@ -45,18 +43,18 @@ public final class NoCache implements Cache {
     }
 
     @Override
-    public boolean delete(String key) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public void delete(String key) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public boolean delete(String key, Date expiry) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public void delete(String key, Date expiry) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
-    public boolean delete(String key, long expiry) {
-        return false;  //To change body of implemented methods use File | Settings | File Templates.
+    public void delete(String key, long expiry) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override

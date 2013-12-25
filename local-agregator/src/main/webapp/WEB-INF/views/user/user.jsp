@@ -27,7 +27,7 @@
         <div class="span12">
 
             <div class="box box-bordered">
-                <div class="box-title no-margin-top" style="border-bottom:1px dashed #c5d0dc;">
+                <div class="box-title no-margin-top"  >
                    <%-- <h3 class="blue">用户管理</h3>--%>
                     <h4 class="inner"><i class="icon-user"></i>用户管理</h4>
                 </div>
@@ -150,7 +150,7 @@
                         if (data == 'enable') {
                             return   '<i class="icon-ok-sign bigger-130 green" title="启用的"></i>';
                         }
-                        return    '<i class="icon-ok-sign bigger-130 red" title="禁用的"></i>';
+                        return    '<i class="icon-remove-circle bigger-130 red" title="禁用的"></i>';
                     },
                     'aTargets': [4 ]
                 },

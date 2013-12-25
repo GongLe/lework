@@ -158,17 +158,19 @@
 </div>
 <!--./sidebar-->
 <script>
-    (function(){
+    (function () {
         //设置当前菜单ID
-        $('#sidebar').on('click','a',function(){
+        $('#sidebar').on('click', 'a', function () {
             //写入大概二十分钟cookie
-            $(this).data('menuId') &&  $.cookie('curMenuId', $(this).data('menuId') ,{expires : 0.015})
+            $(this).data('menuId') && $.cookie('CUR_MENU_ID', $(this).data('menuId'), {expires: 0.015})
         })
-        var curMenuId = $.cookie('curMenuId') ,  $this ;
-        if(curMenuId) {
+        //激活当前页面菜单.
+        var curMenuId = $.cookie('CUR_MENU_ID') , $this , $submenu;
+        if (curMenuId) {
             $this = $('#' + curMenuId);
             $this.parent('li').addClass('active')
-            $this.parents('ul.submenu').length >0   &&  $this.parents('ul.submenu').parent('li').addClass('active open')
+            $submenu = $this.parents('ul.submenu');
+            $submenu.length > 0 && $submenu.parent('li').addClass('active open')
         }
     })()
 </script>

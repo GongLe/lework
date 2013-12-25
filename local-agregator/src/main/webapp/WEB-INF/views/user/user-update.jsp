@@ -152,7 +152,7 @@
                 }
             },
             email : {
-                required: true ,
+                required: false ,
                 maxlength: 50,
                 remote: {
                     url: 'user/validateEmail', //后台处理程序

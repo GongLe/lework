@@ -73,6 +73,14 @@
             <url>http://localhost:8081/nexus/content/groups/public</url>
         </repository>
         -->
+        <!-- BAE maven repository   -->
+        <repository>
+            <id>bae</id>
+            <url>http://maven.duapp.com/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
         <repository>
             <id>maven2</id>
             <name>maven2 Repository</name>
@@ -81,15 +89,7 @@
             <url>http://72.21.81.253/maven2</url>
         </repository>
 
-        <!-- BAE maven repository   -->
-        <repository>
-            <id>baemaven</id>
-            <name>BAE Maven</name>
-            <url>http://maven.duapp.com/nexus/content/groups/public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-        </repository>
+
 
     </repositories>
 
@@ -106,6 +106,33 @@
                 <artifactId>lework-commons</artifactId>
                 <version>${org.lework}</version>
             </dependency>
+            <!--BAE3 SDK-->
+            <dependency>
+                <groupId>com.baidu.bae</groupId>
+                <artifactId>baev3-sdk</artifactId>
+                <version>1.0.0</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>com.baidu.bae</groupId>
+                <artifactId>mcpack</artifactId>
+                <version>1.0.0.9</version>
+                <type>jar</type>
+            </dependency>
+            <!--BAE3 SDK 依赖包-->
+            <dependency>
+                <groupId>net.sf.json-lib</groupId>
+                <artifactId>json-lib</artifactId>
+                <version>2.4</version>
+                <classifier>jdk15</classifier>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.2.2</version>
+                <type>jar</type>
+            </dependency>
+
 
             <!-- SPRING basic begin(一般不需要显式定义) -->
             <dependency>
@@ -494,13 +521,13 @@
 
          <!-- LOGGING begin -->
             <!-- remove the real common-logging from classpath -->
-            <!-- declare as provided or exclude from spring jars -->
+            <!-- declare as provided or exclude from spring jars
             <dependency>
                 <artifactId>commons-logging</artifactId>
                 <groupId>commons-logging</groupId>
                 <version>${commons-logging.version}</version>
                 <scope>provided</scope>
-            </dependency>
+            </dependency>    -->
 
             <!-- add slf4j interfaces to classpath -->
             <dependency>
@@ -641,7 +668,18 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpmime</artifactId>
+                <version>${httpclient.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpcore</artifactId>
+                <version>${httpclient.version}</version>
+                <type>jar</type>
+            </dependency>
             <!-- template engine -->
             <dependency>
                 <groupId>org.freemarker</groupId>

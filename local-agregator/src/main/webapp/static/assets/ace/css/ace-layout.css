@@ -8,7 +8,7 @@ body {
     padding-bottom: 0;
     background-color: #e4e6e9;
     min-height: 100%;
-    font: 12px/150% Tahoma, "Microsoft YaHei", "宋体", "黑体";
+    font-family:Tahoma, "Microsoft YaHei", "宋体", "黑体";
     color: #393939;
 }
 
@@ -51,10 +51,12 @@ body.breadcrumbs-fixed {
     min-height: 100%;
     padding: 0
 }
-#main-footer{
+
+#main-footer {
     position: fixed;
-    border-top:1px solid #ccc;padding: 5px;
-   /* background: #f2f2f2;*/
+/*    border-top: 1px solid #ccc;*/
+    padding: 5px;
+    /* background: #f2f2f2;*/
     bottom: 0;
     width: 100%;
     text-align: center;

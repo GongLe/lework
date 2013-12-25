@@ -5,6 +5,10 @@
 <html>
 <head>
     <title>控制面板</title>
+    <script>
+        //删除cookie保存的菜单ID.
+        $.removeCookie('CUR_MENU_ID')
+    </script>
 </head>
 
 <body>

@@ -7,9 +7,9 @@
         <relativePath>../modules/parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>local-aggregator</artifactId>
+    <artifactId>BAE-aggregator</artifactId>
     <packaging>war</packaging>
-    <name>local-aggregator</name>
+    <name>BAE-aggregator</name>
     <url>http://maven.apache.org</url>
 
     <dependencies>
@@ -246,10 +246,12 @@
         <!-- LOGGING begin -->
         <!-- remove the real common-logging from classpath -->
         <!-- declare as provided or exclude from spring jars -->
-   <!--     <dependency>
+<!--
+        <dependency>
             <artifactId>commons-logging</artifactId>
             <groupId>commons-logging</groupId>
-        </dependency>-->
+        </dependency>
+-->
 
         <!-- add slf4j interfaces to classpath -->
         <dependency>

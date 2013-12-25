@@ -21,7 +21,7 @@
             <a href="${ctx}/dashboard" class="grey"> <i class="icon-home home-icon"></i></a>
         </li>
         <li class="active">
-            组织机构
+           组织机构
         </li>
     </ul>   <!--.breadcrumb-->
 </div>
@@ -31,7 +31,7 @@
         <div class="span12">
             <div class="box">
                 <div class="box-title no-margin-top">
-                    <h3 class="no-margin-top">组织机构</h3>
+                    <h3 class="no-margin-top"> <i class="icon-sitemap"></i>&nbsp;组织机构</h3>
                 </div>
                 <div class="box-content no-padding ">
                     <div class="table-funtion-bar clear-both">
